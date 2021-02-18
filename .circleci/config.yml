@@ -7,18 +7,19 @@ jobs:
         #  username: mydockerhub-user
         #  password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
+
     steps:
-      - checkout
-      - run: mvn dependency:go-offline
-      - run:
-          name: maven ビルド
-          command: |
-            mvn clean install
-      - run:
-          name: jFrog CLI のインストール
-          command: curl -fL https://getcli.jfrog.io | sh
-      - run:
-          name: Artifactory へのプッシュ
-          command: |
-            ./jfrog rt config --url https://takapractice.jfrog.io/artifactory/ --user rock_hop_17@yahoo.co.jp --apikey AKCp8ihAxWhKiAGXNjGSq3WhL2aeAAWMjS2qMMMoZakm7eiKFPbi41obWcHbTWSMLkcgKb8Jt --interactive=false
-            #./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
+       - checkout
+       - run: mvn dependency:go-offline
+       - run:
+           name: maven ビルド
+           command: |
+             mvn clean install
+       - run:
+           name: jFrog CLI のインストール
+           command: curl -fL https://getcli.jfrog.io | sh
+       - run:
+           name: Artifactory へのプッシュ
+           command: |
+             ./jfrog rt config --url https://takapractice.jfrog.io/artifactory/ --user rock_hop_17@yahoo.co.jp --apikey AKCp8ihAxWhKiAGXNjGSq3WhL2aeAAWMjS2qMMMoZakm7eiKFPbi41obWcHbTWSMLkcgKb8Jt --interactive=false
+             #./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
