@@ -1,6 +1,7 @@
 version: 2
 jobs:
-  upload-artifact:
+  build:
+  # upload-artifact:
     docker:
       - image: circleci/openjdk:8-jdk
         # auth:
